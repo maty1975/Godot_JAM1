@@ -1,0 +1,68 @@
+config_version=5
+
+[application]
+
+config/name="Godot Jam1"
+config/tags=PackedStringArray("templates")
+run/main_scene="res://demo/test2.tscn"
+config/features=PackedStringArray("4.3", "Forward Plus")
+boot_splash/show_image=false
+config/icon="res://icon.svg"
+
+[autoload]
+
+SceneManager="*res://addons/scene_manager/SceneManager.tscn"
+PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
+FullscreenControl="*res://addons/fullscreen_control/FullscreenControl.gd"
+Shaker="*res://addons/shaker/src/Shaker.gd"
+DiscordRPCLoader="*res://addons/discord-rpc-gd/nodes/discord_autoload.gd"
+RewindManager="*res://addons/time_rewind_2d/scripts/RewindManager.gd"
+RuntimeDebugTools="*res://addons/runtime_debug_tools/scenes/remote_inspector.tscn"
+Audio="*res://addons/AudioBySymbol/Code/Autoloads/audio_autoload.gd"
+
+[dialogic]
+
+directories/dch_directory={}
+directories/dtl_directory={}
+
+[display]
+
+window/size/viewport_width=1600
+window/size/viewport_height=900
+window/stretch/mode="canvas_items"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/AudioBySymbol/plugin.cfg", "res://addons/AudioEvents/plugin.cfg", "res://addons/anthonyec.camera_preview/plugin.cfg", "res://addons/fullscreen_control/plugin.cfg", "res://addons/parallax2d_preview/plugin.cfg", "res://addons/phantom_camera/plugin.cfg", "res://addons/post_processing/plugin.cfg", "res://addons/project-time-tracker/plugin.cfg", "res://addons/runtime_debug_tools/plugin.cfg", "res://addons/scene_manager/plugin.cfg", "res://addons/shaker/plugin.cfg")
+
+[input]
+
+dialogic_default_action={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194309,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+, Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":32,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":88,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":0,"pressure":0.0,"pressed":false,"script":null)
+]
+}
+
+[internationalization]
+
+locale/translations_pot_files=PackedStringArray("res://o.dialogue")
+
+[layer_names]
+
+2d_physics/layer_1="PLAYER"
+2d_physics/layer_2="TERRENO"
+2d_physics/layer_3="ITEM"
+2d_physics/layer_4="ENEMIGO"
+
+[physics]
+
+3d/physics_engine="JoltPhysics3D"
+2d/default_gravity=600.0
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
