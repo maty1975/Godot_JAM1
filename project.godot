@@ -1,9 +1,17 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
 config_version=5
 
 [application]
 
 config/name="Godot Jam1"
-config/tags=PackedStringArray("templates")
+config/tags=PackedStringArray("jam")
 run/main_scene="res://demo/test2.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 boot_splash/show_image=false
