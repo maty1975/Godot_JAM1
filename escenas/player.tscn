@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://bejx84c34imer"]
+
+[ext_resource type="Texture2D" uid="uid://coat4a0skkqy3" path="res://Sprites/Square.png" id="1_0b2qb"]
+[ext_resource type="Script" path="res://SCRIPTS/Mecanica_p.gd" id="1_v7seo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_518gi"]
+size = Vector2(256, 256)
+
+[node name="Node2D" type="RigidBody2D"]
+modulate = Color(0, 1, 0.0972943, 1)
+script = ExtResource("1_v7seo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_518gi")
+
+[node name="RigidBody2D" type="Sprite2D" parent="."]
+position = Vector2(9, -3)
+texture = ExtResource("1_0b2qb")
+
+[node name="RayCast2D terrain" type="RayCast2D" parent="."]
+rotation = -1.5708
+scale = Vector2(4.32677, 4.32677)
+target_position = Vector2(0, 82.31)
+collision_mask = 2

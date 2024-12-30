@@ -1,0 +1,38 @@
+[gd_scene load_steps=8 format=3 uid="uid://b0olf274d2ogi"]
+
+[ext_resource type="PackedScene" uid="uid://bb28v0x1l4hyi" path="res://escenas/Suelo.tscn" id="1_3m3fn"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_jq360"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="3_pr7kc"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="4_w4dwc"]
+[ext_resource type="PackedScene" uid="uid://ca0dvunfog7l" path="res://escenas/player1.tscn" id="5_6v3ds"]
+[ext_resource type="Script" path="res://SCRIPTS/movimiento.gd" id="6_8pjd6"]
+
+[sub_resource type="Resource" id="Resource_mh42s"]
+script = ExtResource("4_w4dwc")
+duration = 1.0
+transition = 0
+ease = 2
+
+[node name="Experiment_zone" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+physics_interpolation_mode = 2
+position = Vector2(-1024, 449)
+zoom = Vector2(0.2, 0.2)
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D"]
+script = ExtResource("2_jq360")
+
+[node name="PhantomCamera2D" type="Node2D" parent="."]
+position = Vector2(-1024, 449)
+script = ExtResource("3_pr7kc")
+zoom = Vector2(0.2, 0.2)
+tween_resource = SubResource("Resource_mh42s")
+
+[node name="Node2D" parent="." instance=ExtResource("1_3m3fn")]
+position = Vector2(807, 2650)
+scale = Vector2(32.8, 0.399994)
+
+[node name="PLAYER" parent="." instance=ExtResource("5_6v3ds")]
+position = Vector2(-1000, 1456)
+script = ExtResource("6_8pjd6")
