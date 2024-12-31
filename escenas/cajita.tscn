@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfjovve17kepn"]
+
+[ext_resource type="Texture2D" uid="uid://coat4a0skkqy3" path="res://Sprites/Square.png" id="1_xpyxt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_klya7"]
+size = Vector2(256, 256)
+
+[node name="cajita" type="RigidBody2D"]
+collision_layer = 2
+collision_mask = 3
+gravity_scale = 3.0
+lock_rotation = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_xpyxt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_klya7")

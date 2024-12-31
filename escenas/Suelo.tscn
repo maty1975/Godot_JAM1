@@ -18,7 +18,8 @@ shape = SubResource("RectangleShape2D_pw31l")
 
 [node name="Sprite2D" type="StaticBody2D" parent="."]
 position = Vector2(0, -1)
+collision_layer = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D"]
+[node name="colider suelo" type="CollisionShape2D" parent="Sprite2D"]
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_pw31l")

@@ -1,12 +1,33 @@
-[gd_scene load_steps=3 format=3 uid="uid://ca0dvunfog7l"]
+[gd_scene load_steps=9 format=3 uid="uid://ca0dvunfog7l"]
 
 [ext_resource type="Texture2D" uid="uid://coat4a0skkqy3" path="res://Sprites/Square.png" id="1_3751t"]
+[ext_resource type="Texture2D" uid="uid://b3fdhfpxdxx3t" path="res://Sprites/Circle.png" id="2_5lv40"]
+[ext_resource type="Script" path="res://SCRIPTS/efectosalto.gd" id="3_b3q0q"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ot6lm"]
+friction = 0.5
+rough = true
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ixw54"]
 size = Vector2(256, 256)
 
+[sub_resource type="Curve" id="Curve_pipg1"]
+max_value = 0.15
+_data = [Vector2(0, 0.0837236), 0.0, 0.0, 0, 0, Vector2(0.411765, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w1jp6"]
+size = Vector2(256, 8)
+
+[sub_resource type="Curve" id="Curve_gah7h"]
+max_value = 0.15
+_data = [Vector2(0, 0.15), 0.0, 0.0, 0, 0, Vector2(0.852941, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [node name="PLAYER" type="RigidBody2D"]
 scale = Vector2(0.5, 0.5)
+collision_mask = 6
+physics_material_override = SubResource("PhysicsMaterial_ot6lm")
 gravity_scale = 8.0
 lock_rotation = true
 
@@ -19,6 +40,66 @@ shape = SubResource("RectangleShape2D_ixw54")
 [node name="RayCast2D suelo" type="RayCast2D" parent="."]
 position = Vector2(0, 106)
 target_position = Vector2(0, 30)
-collision_mask = 2
+collision_mask = 6
 collide_with_areas = true
-collide_with_bodies = false
+
+[node name="particle_left" type="CPUParticles2D" parent="."]
+position = Vector2(-136, 114)
+rotation = 0.584043
+emitting = false
+amount = 150
+texture = ExtResource("2_5lv40")
+direction = Vector2(-500, 0)
+spread = 49.93
+initial_velocity_min = 1000.0
+initial_velocity_max = 1000.0
+linear_accel_min = -100.0
+angle_max = 621.4
+scale_amount_curve = SubResource("Curve_pipg1")
+
+[node name="particle_right" type="CPUParticles2D" parent="."]
+position = Vector2(132, 114)
+rotation = 2.61799
+emitting = false
+amount = 150
+texture = ExtResource("2_5lv40")
+direction = Vector2(-500, 0)
+spread = 49.93
+initial_velocity_min = 1000.0
+initial_velocity_max = 1000.0
+linear_accel_min = -100.0
+angle_max = 621.4
+scale_amount_curve = SubResource("Curve_pipg1")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, 126)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("3_b3q0q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_w1jp6")
+
+[node name="particula suelo" type="CPUParticles2D" parent="."]
+z_index = -1
+position = Vector2(0, 78)
+emitting = false
+amount = 200
+lifetime = 0.7
+one_shot = true
+preprocess = 179.15
+explosiveness = 1.0
+fixed_fps = 60
+texture = ExtResource("2_5lv40")
+emission_shape = 4
+emission_points = PackedVector2Array()
+emission_colors = PackedColorArray()
+direction = Vector2(1, -18.825)
+spread = 71.51
+gravity = Vector2(0, 700)
+initial_velocity_min = 41.09
+initial_velocity_max = 732.88
+angle_max = 720.0
+scale_amount_curve = SubResource("Curve_gah7h")
+
+[connection signal="area_entered" from="Area2D" to="Area2D" method="_on_area_entered"]
