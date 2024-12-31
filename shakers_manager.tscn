@@ -4,3 +4,5 @@
 
 [node name="Shakers_manager" type="Node2D"]
 script = ExtResource("1_7toaf")
+
+[connection signal="SHEIK" from="." to="." method="_on_sheik"]

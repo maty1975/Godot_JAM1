@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://5wgaefw7abra"]
+
+[ext_resource type="Texture2D" uid="uid://coat4a0skkqy3" path="res://Sprites/Square.png" id="1_novxn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e7pi4"]
+size = Vector2(256, 256)
+
+[node name="plataforma" type="StaticBody2D"]
+scale = Vector2(1.6, 0.24)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_e7pi4")
+one_way_collision = true
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_e7pi4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_novxn")

@@ -3,8 +3,11 @@ extends RigidBody2D
 @onready var ray_cast_2d_suelo: RayCast2D = $"RayCast2D suelo"
 @onready var particle_left: CPUParticles2D = $particle_left
 @onready var particle_right: CPUParticles2D = $particle_right
+#@onready var shakers_manager: Node2D = $"../Shakers_manager"
+@onready var animation_tree: AnimationTree = $AnimationTree
 
-@onready var shaker_component_2d: ShakerComponent2D = $"../PhantomCamera2D/ShakerComponent2D"
+
+
 
 var movement : Vector2
 var gravedad_default : int
@@ -13,7 +16,7 @@ var gravedad_default : int
 var saltando : bool
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	shaker_component_2d.play_shake()
+	
 	gravedad_default = gravedad
 	movement.x = 800
 	pass # Replace with function body.
@@ -45,6 +48,7 @@ func salto():
 			
 	elif Input.is_action_just_released("Spacebar"):
 		if (saltando ==true):
+			
 			gravity_scale = gravedad * 4
 		
 func rayo():
@@ -58,12 +62,19 @@ func rayo():
 		
 func activar_salto():
 	saltando = false
+	act_anim_salto()
 	#if linear_velocity.y >= 50:
 		#print("SHAKY")
 
 func desactivar_salto():
 	saltando = true
-	
+	des_anim_salto()
 
-func fuerza_suelo():
-	pass
+func act_anim_salto():
+	animation_tree["parameters/conditions/idle"] = true
+	animation_tree["parameters/conditions/jumping"] = false
+	
+func des_anim_salto():
+	animation_tree["parameters/conditions/jumping"] = true
+	animation_tree["parameters/conditions/idle"] = false
+	

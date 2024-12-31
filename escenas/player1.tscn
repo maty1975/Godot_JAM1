@@ -1,8 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://ca0dvunfog7l"]
+[gd_scene load_steps=25 format=3 uid="uid://ca0dvunfog7l"]
 
-[ext_resource type="Texture2D" uid="uid://coat4a0skkqy3" path="res://Sprites/Square.png" id="1_3751t"]
+[ext_resource type="Script" path="res://SCRIPTS/movimiento.gd" id="1_yh5w7"]
 [ext_resource type="Texture2D" uid="uid://b3fdhfpxdxx3t" path="res://Sprites/Circle.png" id="2_5lv40"]
+[ext_resource type="Texture2D" uid="uid://brtg6fp4dyp0b" path="res://Sprites/Player/idle1.png" id="2_fyimw"]
 [ext_resource type="Script" path="res://SCRIPTS/efectosalto.gd" id="3_b3q0q"]
+[ext_resource type="Texture2D" uid="uid://xyvucir43ynk" path="res://Sprites/Player/idle2.png" id="5_s0tmf"]
+[ext_resource type="Texture2D" uid="uid://cxnm3xcluchxq" path="res://Sprites/Player/idle3.png" id="6_vdasl"]
+[ext_resource type="Texture2D" uid="uid://j504j0nybn3g" path="res://Sprites/Player/jump1.png" id="7_w6vb1"]
+[ext_resource type="Texture2D" uid="uid://da4v4ndswl0ux" path="res://Sprites/Player/jump2.png" id="8_y5oel"]
+[ext_resource type="Texture2D" uid="uid://bnnruuj1f33wh" path="res://Sprites/Player/jump3.png" id="9_m761s"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ot6lm"]
 friction = 0.5
@@ -24,15 +30,99 @@ max_value = 0.15
 _data = [Vector2(0, 0.15), 0.0, 0.0, 0, 0, Vector2(0.852941, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4mk5g"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_00v4v"]
+animation = &"Jump"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_u3xn4"]
+reset = false
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0on52"]
+advance_mode = 2
+advance_condition = &"jumping"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7yo06"]
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_dlhwb"]
+states/Idle/node = SubResource("AnimationNodeAnimation_4mk5g")
+states/Idle/position = Vector2(431, 100)
+states/Jump/node = SubResource("AnimationNodeAnimation_00v4v")
+states/Jump/position = Vector2(611, 100)
+states/Start/position = Vector2(222, 100)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_u3xn4"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_0on52"), "Jump", "Idle", SubResource("AnimationNodeStateMachineTransition_7yo06")]
+
+[sub_resource type="Animation" id="Animation_bvram"]
+resource_name = "Idle"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_fyimw"), ExtResource("5_s0tmf"), ExtResource("6_vdasl")]
+}
+
+[sub_resource type="Animation" id="Animation_7i2mg"]
+resource_name = "Jump"
+length = 0.3105
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.233333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("7_w6vb1"), ExtResource("8_y5oel"), ExtResource("9_m761s")]
+}
+
+[sub_resource type="Animation" id="Animation_vybbm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_fyimw")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gufe5"]
+_data = {
+"Idle": SubResource("Animation_bvram"),
+"Jump": SubResource("Animation_7i2mg"),
+"RESET": SubResource("Animation_vybbm")
+}
+
 [node name="PLAYER" type="RigidBody2D"]
-scale = Vector2(0.5, 0.5)
+position = Vector2(-1.90735e-06, -1.90735e-06)
 collision_mask = 6
 physics_material_override = SubResource("PhysicsMaterial_ot6lm")
 gravity_scale = 8.0
 lock_rotation = true
+script = ExtResource("1_yh5w7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_3751t")
+scale = Vector2(4.02952, 4.02952)
+texture = ExtResource("2_fyimw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ixw54")
@@ -40,11 +130,11 @@ shape = SubResource("RectangleShape2D_ixw54")
 [node name="RayCast2D suelo" type="RayCast2D" parent="."]
 position = Vector2(0, 106)
 target_position = Vector2(0, 30)
-collision_mask = 6
+collision_mask = 2
 collide_with_areas = true
 
 [node name="particle_left" type="CPUParticles2D" parent="."]
-position = Vector2(-136, 114)
+position = Vector2(-113.83, 114)
 rotation = 0.584043
 emitting = false
 amount = 150
@@ -58,7 +148,7 @@ angle_max = 621.4
 scale_amount_curve = SubResource("Curve_pipg1")
 
 [node name="particle_right" type="CPUParticles2D" parent="."]
-position = Vector2(132, 114)
+position = Vector2(96.955, 114)
 rotation = 2.61799
 emitting = false
 amount = 150
@@ -73,7 +163,6 @@ scale_amount_curve = SubResource("Curve_pipg1")
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(0, 126)
-collision_layer = 0
 collision_mask = 2
 script = ExtResource("3_b3q0q")
 
@@ -99,5 +188,19 @@ gravity = Vector2(0, 700)
 initial_velocity_max = 732.88
 angle_max = 720.0
 scale_amount_curve = SubResource("Curve_gah7h")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_dlhwb")
+anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/idle = false
+parameters/conditions/jumping = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+active = false
+libraries = {
+"": SubResource("AnimationLibrary_gufe5")
+}
+autoplay = "Idle"
+playback_auto_capture = false
 
 [connection signal="area_entered" from="Area2D" to="Area2D" method="_on_area_entered"]

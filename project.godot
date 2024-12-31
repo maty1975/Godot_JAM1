@@ -17,6 +17,10 @@ config/features=PackedStringArray("4.3", "Forward Plus")
 boot_splash/show_image=false
 config/icon="res://icon.svg"
 
+[aseprite_importers]
+
+aseprite_executable_path="C:/Program Files/Aseprite/Aseprite.exe"
+
 [autoload]
 
 SceneManager="*res://addons/scene_manager/SceneManager.tscn"
@@ -44,7 +48,7 @@ window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/ScriptEditorQoL/plugin.cfg", "res://addons/anthonyec.camera_preview/plugin.cfg", "res://addons/fullscreen_control/plugin.cfg", "res://addons/phantom_camera/plugin.cfg", "res://addons/post_processing/plugin.cfg", "res://addons/runtime_debug_tools/plugin.cfg", "res://addons/scene_manager/plugin.cfg", "res://addons/shaker/plugin.cfg")
+enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/ScriptEditorQoL/plugin.cfg", "res://addons/anthonyec.camera_preview/plugin.cfg", "res://addons/fullscreen_control/plugin.cfg", "res://addons/nklbdev.aseprite_importers/plugin.cfg", "res://addons/phantom_camera/plugin.cfg", "res://addons/post_processing/plugin.cfg", "res://addons/runtime_debug_tools/plugin.cfg", "res://addons/scene_manager/plugin.cfg", "res://addons/shaker/plugin.cfg")
 
 [input]
 
