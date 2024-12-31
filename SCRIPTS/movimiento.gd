@@ -4,6 +4,8 @@ extends RigidBody2D
 @onready var particle_left: CPUParticles2D = $particle_left
 @onready var particle_right: CPUParticles2D = $particle_right
 
+@onready var shaker_component_2d: ShakerComponent2D = $"../PhantomCamera2D/ShakerComponent2D"
+
 var movement : Vector2
 var gravedad_default : int
 @export var gravedad : int = 8
@@ -11,6 +13,7 @@ var gravedad_default : int
 var saltando : bool
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	shaker_component_2d.play_shake()
 	gravedad_default = gravedad
 	movement.x = 800
 	pass # Replace with function body.
@@ -18,7 +21,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	print(linear_velocity)
+	#print(linear_velocity)
 	if Input.is_action_pressed("ui_left"):
 		set_axis_velocity(-movement)
 		particle_right.emitting = true
@@ -47,7 +50,7 @@ func salto():
 func rayo():
 	if ray_cast_2d_suelo.is_colliding():
 		gravity_scale = gravedad_default
-		print(saltando)
+		#print(saltando)
 		activar_salto()
 	else:
 		desactivar_salto()

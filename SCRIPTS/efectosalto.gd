@@ -5,5 +5,5 @@ extends Area2D
 
 
 func _on_area_entered(area: Area2D) -> void:
-	if rbplayer.linear_velocity.y <= 10:
+	#if rbplayer.linear_velocity.y <= 10:
 		particula_suelo.emitting = true
