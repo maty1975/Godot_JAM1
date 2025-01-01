@@ -11,11 +11,17 @@ var is_transitioning := false
 @onready var _current_scene := _tree.current_scene
 @onready var _animation_player : AnimationPlayer = $AnimationPlayer
 @onready var _shader_blend_rect : ColorRect = $CanvasLayer/ColorRect
-
+## squares
+## curtains
+## diagonal
+## horizontal
+## radial
+## scribbles
+## vertical
 var default_options := {
 	"speed": 2,
 	"color": Color("#000000"),
-	"pattern": "fade",
+	"pattern": "scribbles",
 	"wait_time": 0.5,
 	"invert": false,
 	"invert_on_leave": true,

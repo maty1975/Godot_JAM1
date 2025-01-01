@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://5e4y7beb0ljy"]
+[gd_scene load_steps=2 format=3 uid="uid://5e4y7beb0ljy"]
+
+[ext_resource type="Script" path="res://escenas/MENUS/play.gd" id="1_pcry8"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -21,16 +23,32 @@ color = Color(0.595041, 0.595041, 0.595041, 1)
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.048125
-anchor_top = 0.307778
-anchor_right = 0.292966
-anchor_bottom = 0.559358
-offset_right = -64.746
+anchor_left = 0.3425
+anchor_top = 0.602222
+anchor_right = 0.538862
+anchor_bottom = 0.853802
+offset_right = -25.9631
 offset_bottom = -37.422
+grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(1.198, 1.198)
+scale = Vector2(1.79503, 1.79503)
 metadata/_edit_use_anchors_ = true
 
 [node name="Button" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "PLAY"
+script = ExtResource("1_pcry8")
+
+[node name="VSplitContainer" type="VSplitContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 284.0
+offset_top = 182.0
+offset_right = 413.0
+offset_bottom = 235.0
+scale = Vector2(3.45493, 3.45493)
+text = "BOX-OUT"
+
+[connection signal="button_down" from="VBoxContainer/Button" to="VBoxContainer/Button" method="_on_button_down"]

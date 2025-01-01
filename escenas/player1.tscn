@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://ca0dvunfog7l"]
+[gd_scene load_steps=26 format=3 uid="uid://ca0dvunfog7l"]
 
 [ext_resource type="Script" path="res://SCRIPTS/movimiento.gd" id="1_yh5w7"]
 [ext_resource type="Texture2D" uid="uid://b3fdhfpxdxx3t" path="res://Sprites/Circle.png" id="2_5lv40"]
@@ -11,8 +11,9 @@
 [ext_resource type="Texture2D" uid="uid://bnnruuj1f33wh" path="res://Sprites/Player/jump3.png" id="9_m761s"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ot6lm"]
-friction = 0.5
+friction = 0.3
 rough = true
+absorbent = true
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ixw54"]
 size = Vector2(256, 256)
@@ -112,6 +113,11 @@ _data = {
 "RESET": SubResource("Animation_vybbm")
 }
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_5obxy"]
+closed = false
+cull_mode = 2
+polygon = PackedVector2Array(-128, -128, -128, 128, 128, 128, 128, -128)
+
 [node name="PLAYER" type="RigidBody2D"]
 position = Vector2(-1.90735e-06, -1.90735e-06)
 collision_mask = 6
@@ -129,7 +135,7 @@ shape = SubResource("RectangleShape2D_ixw54")
 
 [node name="RayCast2D suelo" type="RayCast2D" parent="."]
 position = Vector2(0, 106)
-target_position = Vector2(0, 30)
+target_position = Vector2(1.90735e-06, 54)
 collision_mask = 2
 collide_with_areas = true
 
@@ -162,7 +168,7 @@ angle_max = 621.4
 scale_amount_curve = SubResource("Curve_pipg1")
 
 [node name="Area2D" type="Area2D" parent="."]
-position = Vector2(0, 126)
+position = Vector2(0, 125.805)
 collision_mask = 2
 script = ExtResource("3_b3q0q")
 
@@ -202,5 +208,9 @@ libraries = {
 }
 autoplay = "Idle"
 playback_auto_capture = false
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+visible = false
+occluder = SubResource("OccluderPolygon2D_5obxy")
 
 [connection signal="area_entered" from="Area2D" to="Area2D" method="_on_area_entered"]

@@ -11,7 +11,9 @@ extends RigidBody2D
 
 var movement : Vector2
 var gravedad_default : int
-@export var gravedad : int = 8
+@export var gravedad : int = 5
+@export var downgravity : int = 5
+@export var fuerza_salto : int = 2000
 
 var saltando : bool
 # Called when the node enters the scene tree for the first time.
@@ -43,13 +45,13 @@ func _physics_process(delta: float) -> void:
 func salto():
 	if Input.is_action_just_pressed("Spacebar"):
 		if (saltando == false):
-			apply_impulse(Vector2(0,-2000))
+			apply_impulse(Vector2(0,-fuerza_salto))
 			gravity_scale = gravedad
 			
 	elif Input.is_action_just_released("Spacebar"):
 		if (saltando ==true):
 			
-			gravity_scale = gravedad * 4
+			gravity_scale = gravedad * downgravity
 		
 func rayo():
 	if ray_cast_2d_suelo.is_colliding():
