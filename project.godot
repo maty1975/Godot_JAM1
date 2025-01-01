@@ -24,12 +24,12 @@ aseprite_executable_path="C:/Program Files/Aseprite/Aseprite.exe"
 [autoload]
 
 SceneManager="*res://addons/scene_manager/SceneManager.tscn"
-PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
 FullscreenControl="*res://addons/fullscreen_control/FullscreenControl.gd"
 Shaker="*res://addons/shaker/src/Shaker.gd"
 DiscordRPCLoader="*res://addons/discord-rpc-gd/nodes/discord_autoload.gd"
 RewindManager="*res://addons/time_rewind_2d/scripts/RewindManager.gd"
 RuntimeDebugTools="*res://addons/runtime_debug_tools/scenes/remote_inspector.tscn"
+SodaAudioManager="*res://addons/SodaAudioManager/Scenes/soda_audio_manager.scn"
 
 [debug]
 
@@ -48,7 +48,7 @@ window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/Point2D/plugin.cfg", "res://addons/ScriptEditorQoL/plugin.cfg", "res://addons/anthonyec.camera_preview/plugin.cfg", "res://addons/fullscreen_control/plugin.cfg", "res://addons/nklbdev.aseprite_importers/plugin.cfg", "res://addons/phantom_camera/plugin.cfg", "res://addons/post_processing/plugin.cfg", "res://addons/runtime_debug_tools/plugin.cfg", "res://addons/scene_manager/plugin.cfg", "res://addons/shaker/plugin.cfg")
+enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/Point2D/plugin.cfg", "res://addons/SodaAudioManager/plugin.cfg", "res://addons/anthonyec.camera_preview/plugin.cfg", "res://addons/fullscreen_control/plugin.cfg", "res://addons/nklbdev.aseprite_importers/plugin.cfg", "res://addons/post_processing/plugin.cfg", "res://addons/runtime_debug_tools/plugin.cfg", "res://addons/scene_manager/plugin.cfg", "res://addons/shaker/plugin.cfg")
 
 [input]
 

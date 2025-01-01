@@ -1,8 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://b0olf274d2ogi"]
+[gd_scene load_steps=20 format=3 uid="uid://b0olf274d2ogi"]
 
 [ext_resource type="PackedScene" uid="uid://bb28v0x1l4hyi" path="res://escenas/Suelo.tscn" id="1_3m3fn"]
 [ext_resource type="Script" path="res://addons/shaker/data/Vector2/BaseShakerType2D.gd" id="2_8xbrw"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_jq360"]
 [ext_resource type="Script" path="res://addons/shaker/src/Vector2/shaker_component2D.gd" id="4_a7yim"]
 [ext_resource type="Script" path="res://addons/shaker/data/Single/BaseShakerType1D.gd" id="4_ba11q"]
 [ext_resource type="PackedScene" uid="uid://ca0dvunfog7l" path="res://escenas/player1.tscn" id="5_6v3ds"]
@@ -10,8 +9,11 @@
 [ext_resource type="Script" path="res://addons/shaker/data/Vector2/ShakerTypeSawtoothWave2D.gd" id="6_k8yi6"]
 [ext_resource type="Script" path="res://addons/shaker/src/Vector2/ShakerReceiver2D.gd" id="9_msis5"]
 [ext_resource type="Script" path="res://addons/Point2D/scripts/Point2D.gd" id="12_dq1wh"]
+[ext_resource type="Script" path="res://GDScript/ambient_sound.gd" id="13_f3ae3"]
 [ext_resource type="PackedScene" uid="uid://5p7f142t86kp" path="res://shakers_manager.tscn" id="13_otv8t"]
+[ext_resource type="Texture2D" uid="uid://8edo5408mtq8" path="res://aseprite/plataforma.aseprite" id="13_pcml7"]
 [ext_resource type="PackedScene" uid="uid://5wgaefw7abra" path="res://escenas/plataforma.tscn" id="14_0bm02"]
+[ext_resource type="Texture2D" uid="uid://t68d1nyolbup" path="res://aseprite/Sprite-0006.aseprite" id="14_wf3p4"]
 
 [sub_resource type="Resource" id="Resource_advmu"]
 script = ExtResource("6_k8yi6")
@@ -37,13 +39,13 @@ __follow_timeline = false
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_reuwh"]
 
-[sub_resource type="Gradient" id="Gradient_swu3x"]
+[sub_resource type="Gradient" id="Gradient_fwl2e"]
 interpolation_mode = 2
 offsets = PackedFloat32Array(0, 0.641, 0.7)
 colors = PackedColorArray(1, 1, 1, 0.67, 0.16, 0.16, 0.16, 0.37, 0, 0, 0, 0)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_7gul7"]
-gradient = SubResource("Gradient_swu3x")
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_t00uo"]
+gradient = SubResource("Gradient_fwl2e")
 width = 256
 height = 256
 fill = 1
@@ -51,14 +53,6 @@ fill_from = Vector2(0.5, 0.5)
 
 [node name="Experiment_zone" type="Node2D"]
 position = Vector2(13.4543, -612.172)
-
-[node name="suelo" parent="." instance=ExtResource("1_3m3fn")]
-position = Vector2(-998.636, 2650)
-scale = Vector2(15.6069, 0.399994)
-
-[node name="suelo2" parent="." instance=ExtResource("1_3m3fn")]
-position = Vector2(-3285.33, -41958.8)
-scale = Vector2(12.5359, 7.52641)
 
 [node name="plataforma arriba" parent="." instance=ExtResource("1_3m3fn")]
 position = Vector2(-3921.69, -46077.7)
@@ -68,15 +62,35 @@ scale = Vector2(9.63293, 5.06825)
 position = Vector2(-531.408, -46077.7)
 scale = Vector2(9.63293, 5.06825)
 
+[node name="suelo2" parent="." instance=ExtResource("1_3m3fn")]
+z_index = -2
+position = Vector2(-3285.33, -41958.8)
+scale = Vector2(12.5359, 7.52641)
+
 [node name="suelo3" parent="." instance=ExtResource("1_3m3fn")]
+z_index = -2
 position = Vector2(-1408.02, -42064.5)
 scale = Vector2(2.13031, 8.35223)
 
 [node name="suelo4" parent="." instance=ExtResource("1_3m3fn")]
+z_index = -2
 position = Vector2(-861.955, -42236)
 scale = Vector2(2.13031, 9.69162)
 
+[node name="suelo" parent="." instance=ExtResource("1_3m3fn")]
+position = Vector2(-1006.57, 3297.06)
+scale = Vector2(15.6689, 3.83019)
+
+[node name="Muro izq" parent="." instance=ExtResource("1_3m3fn")]
+position = Vector2(-3320.68, -21141.8)
+scale = Vector2(2.3881, 189.898)
+
+[node name="Muro der" parent="." instance=ExtResource("1_3m3fn")]
+position = Vector2(1312, -21028)
+scale = Vector2(2.3881, 189.117)
+
 [node name="PLAYER" parent="." instance=ExtResource("5_6v3ds")]
+z_index = 1
 position = Vector2(-2596.99, -43173.6)
 linear_damp = 1.0
 gravedad = 7
@@ -96,9 +110,6 @@ position_smoothing_speed = 500.0
 drag_vertical_enabled = true
 drag_vertical_offset = 1.0
 editor_draw_limits = true
-
-[node name="PhantomCameraHost" type="Node" parent="PLAYER/Camera2D"]
-script = ExtResource("2_jq360")
 
 [node name="ShakerComponent2D" type="Node2D" parent="PLAYER"]
 position = Vector2(2048, -262.719)
@@ -130,12 +141,12 @@ scale = Vector2(2.48, 0.24)
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="Point2D" type="PointLight2D" parent="."]
-position = Vector2(-2257.82, -48756.8)
+position = Vector2(-2325.25, -48366.8)
 scale = Vector2(7.81932, 7.81932)
 color = Color(1, 1, 1, 0.431373)
-energy = 262.75
+energy = 150.0
 shadow_enabled = true
-texture = SubResource("GradientTexture2D_7gul7")
+texture = SubResource("GradientTexture2D_t00uo")
 texture_scale = 6.0
 script = ExtResource("12_dq1wh")
 enable_shadow = true
@@ -143,6 +154,9 @@ light_brightness = 16.0
 point_color = Color(1, 1, 1, 0.67)
 edge_color = Color(0.16, 0.16, 0.16, 0.37)
 light_distance = 6.0
+
+[node name="ambient_sound" type="Node2D" parent="."]
+script = ExtResource("13_f3ae3")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -152,13 +166,47 @@ offset_bottom = 40.0
 size_flags_vertical = 3
 
 [node name="ColorRect" type="ColorRect" parent="Control"]
+z_index = 1
 layout_mode = 1
 anchors_preset = -1
-anchor_left = -152.05
-anchor_top = -1278.88
-anchor_right = 66.8
-anchor_bottom = 91.675
+anchor_left = -152.451
+anchor_top = -1278.92
+anchor_right = 66.3991
+anchor_bottom = 91.6305
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.00392157, 0.00392157, 0.00392157, 0.890196)
 metadata/_edit_use_anchors_ = true
+
+[node name="Plataforma" type="Sprite2D" parent="."]
+position = Vector2(-1402.51, -43104)
+scale = Vector2(4.78525, 3.24716)
+texture = ExtResource("13_pcml7")
+
+[node name="Plataforma3" type="Sprite2D" parent="."]
+position = Vector2(-2332.96, -42972.8)
+scale = Vector2(11.0593, 3.24716)
+texture = ExtResource("13_pcml7")
+
+[node name="Plataforma2" type="Sprite2D" parent="."]
+position = Vector2(-863.239, -43484.1)
+scale = Vector2(4.68014, 2.93177)
+texture = ExtResource("13_pcml7")
+
+[node name="Sprite-0006" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(-1410.8, -42022.4)
+scale = Vector2(8.77333, 32.6224)
+texture = ExtResource("14_wf3p4")
+
+[node name="Sprite-0008" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(-2351.27, -41950.6)
+scale = Vector2(21.4091, 31.2066)
+texture = ExtResource("14_wf3p4")
+
+[node name="Sprite-0007" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(-854.895, -42211.5)
+scale = Vector2(8.84375, 38.292)
+texture = ExtResource("14_wf3p4")

@@ -45,6 +45,7 @@ func _physics_process(delta: float) -> void:
 func salto():
 	if Input.is_action_just_pressed("Spacebar"):
 		if (saltando == false):
+			SodaAudioManager.play_snd_player("res://sonido/SFX/player_jump.wav")
 			apply_impulse(Vector2(0,-fuerza_salto))
 			gravity_scale = gravedad
 			

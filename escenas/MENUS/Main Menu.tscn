@@ -44,11 +44,11 @@ layout_mode = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 layout_mode = 0
-offset_left = 284.0
-offset_top = 182.0
-offset_right = 413.0
-offset_bottom = 235.0
-scale = Vector2(3.45493, 3.45493)
+offset_left = 274.0
+offset_top = 163.0
+offset_right = 350.0
+offset_bottom = 186.0
+scale = Vector2(3.20807, 3.20807)
 text = "BOX-OUT"
 
 [connection signal="button_down" from="VBoxContainer/Button" to="VBoxContainer/Button" method="_on_button_down"]

@@ -12,8 +12,8 @@ extends Area2D
 func _on_area_entered(area: Area2D) -> void:
 	
 	if rbplayer.linear_velocity.y <= 1000:
+		SodaAudioManager.play_snd_player("res://sonido/SFX/afterjump.wav")
 		#shaker_ref.play_shake()
-		
 		#shakers_manager.emit_signal("SHEIK", self, "_on_sheik")
 		particula_suelo.emitting = true
 		

@@ -1,0 +1,172 @@
+[gd_scene load_steps=18 format=3 uid="uid://b0olf274d2ogi"]
+
+[ext_resource type="PackedScene" uid="uid://bb28v0x1l4hyi" path="res://escenas/Suelo.tscn" id="1_3m3fn"]
+[ext_resource type="Script" path="res://addons/shaker/data/Vector2/BaseShakerType2D.gd" id="2_8xbrw"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_jq360"]
+[ext_resource type="Script" path="res://addons/shaker/src/Vector2/shaker_component2D.gd" id="4_a7yim"]
+[ext_resource type="Script" path="res://addons/shaker/data/Single/BaseShakerType1D.gd" id="4_ba11q"]
+[ext_resource type="PackedScene" uid="uid://ca0dvunfog7l" path="res://escenas/player1.tscn" id="5_6v3ds"]
+[ext_resource type="Script" path="res://addons/shaker/data/Vector2/ShakerPreset2D.gd" id="5_etrb7"]
+[ext_resource type="Script" path="res://addons/shaker/data/Vector2/ShakerTypeSawtoothWave2D.gd" id="6_k8yi6"]
+[ext_resource type="Script" path="res://addons/shaker/src/Vector2/ShakerReceiver2D.gd" id="9_msis5"]
+[ext_resource type="Script" path="res://addons/Point2D/scripts/Point2D.gd" id="12_dq1wh"]
+[ext_resource type="PackedScene" uid="uid://5p7f142t86kp" path="res://shakers_manager.tscn" id="13_otv8t"]
+[ext_resource type="PackedScene" uid="uid://5wgaefw7abra" path="res://escenas/plataforma.tscn" id="14_0bm02"]
+
+[sub_resource type="Resource" id="Resource_advmu"]
+script = ExtResource("6_k8yi6")
+frequency = Vector2(25.04, 11.465)
+asymmetry = Vector2(1, 0.5)
+amplitude = Vector2(1, 1)
+offset = Vector2(0, 0)
+BlendingMode = 0
+fade_in = 0.0
+fade_out = 0.0
+start_percent = 0.0
+end_percent = 1.0
+_temp_graph = false
+bake_internal = 64
+
+[sub_resource type="Resource" id="Resource_gpbm2"]
+script = ExtResource("5_etrb7")
+PositionShake = Array[ExtResource("2_8xbrw")]([SubResource("Resource_advmu")])
+RotationShake = Array[ExtResource("4_ba11q")]([])
+ScaleShake = Array[ExtResource("2_8xbrw")]([])
+bake_internal = 64
+__follow_timeline = false
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_reuwh"]
+
+[sub_resource type="Gradient" id="Gradient_c5l3j"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.641, 0.7)
+colors = PackedColorArray(1, 1, 1, 0.67, 0.16, 0.16, 0.16, 0.37, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_eb4m7"]
+gradient = SubResource("Gradient_c5l3j")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="Experiment_zone" type="Node2D"]
+position = Vector2(13.4543, -612.172)
+
+[node name="suelo2" parent="." instance=ExtResource("1_3m3fn")]
+position = Vector2(-3285.33, -41958.8)
+scale = Vector2(12.5359, 7.52641)
+
+[node name="plataforma arriba" parent="." instance=ExtResource("1_3m3fn")]
+position = Vector2(-3921.69, -46077.7)
+scale = Vector2(9.63293, 5.06825)
+
+[node name="plataforma arriba2" parent="." instance=ExtResource("1_3m3fn")]
+position = Vector2(-531.408, -46077.7)
+scale = Vector2(9.63293, 5.06825)
+
+[node name="suelo3" parent="." instance=ExtResource("1_3m3fn")]
+position = Vector2(-1408.02, -42064.5)
+scale = Vector2(2.13031, 8.35223)
+
+[node name="suelo" parent="." instance=ExtResource("1_3m3fn")]
+position = Vector2(-1006.57, 3297.06)
+scale = Vector2(15.6689, 3.83019)
+
+[node name="Muro izq" parent="." instance=ExtResource("1_3m3fn")]
+position = Vector2(-3320.68, -21141.8)
+scale = Vector2(2.3881, 189.898)
+
+[node name="Muro der" parent="." instance=ExtResource("1_3m3fn")]
+position = Vector2(1312, -21028)
+scale = Vector2(2.3881, 189.117)
+
+[node name="suelo4" parent="." instance=ExtResource("1_3m3fn")]
+position = Vector2(-861.955, -42236)
+scale = Vector2(2.13031, 9.69162)
+
+[node name="PLAYER" parent="." instance=ExtResource("5_6v3ds")]
+position = Vector2(-2596.99, -43173.6)
+linear_damp = 1.0
+gravedad = 7
+downgravity = 7
+fuerza_salto = 2500
+
+[node name="Camera2D" type="Camera2D" parent="PLAYER"]
+physics_interpolation_mode = 2
+position = Vector2(0, 635.281)
+scale = Vector2(2, 2)
+zoom = Vector2(0.2, 0.2)
+limit_left = -3000
+limit_right = 1000
+limit_bottom = 2705
+limit_smoothed = true
+position_smoothing_speed = 500.0
+drag_vertical_enabled = true
+drag_vertical_offset = 1.0
+editor_draw_limits = true
+
+[node name="PhantomCameraHost" type="Node" parent="PLAYER/Camera2D"]
+script = ExtResource("2_jq360")
+
+[node name="ShakerComponent2D" type="Node2D" parent="PLAYER"]
+position = Vector2(2048, -262.719)
+scale = Vector2(2, 2)
+script = ExtResource("4_a7yim")
+intensity = 24.395
+duration = 1.0
+shakerPreset = SubResource("Resource_gpbm2")
+
+[node name="ShakerReceiver2D" type="Node2D" parent="PLAYER/ShakerComponent2D"]
+position = Vector2(-1024, 449)
+script = ExtResource("9_msis5")
+
+[node name="Area2D" type="Area2D" parent="PLAYER/ShakerComponent2D/ShakerReceiver2D"]
+collision_layer = 0
+collision_mask = 512
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PLAYER/ShakerComponent2D/ShakerReceiver2D/Area2D"]
+shape = SubResource("RectangleShape2D_reuwh")
+
+[node name="Shakers_manager" parent="." node_paths=PackedStringArray("camaras") instance=ExtResource("13_otv8t")]
+position = Vector2(-1872, 1416)
+camaras = [NodePath("../PLAYER/ShakerComponent2D")]
+
+[node name="plataforma" parent="." instance=ExtResource("14_0bm02")]
+position = Vector2(-952, -28817.7)
+scale = Vector2(2.48, 0.24)
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Point2D" type="PointLight2D" parent="."]
+position = Vector2(-2200.8, -48628.5)
+scale = Vector2(7.81932, 7.81932)
+color = Color(1, 1, 1, 0.431373)
+energy = 16.0
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_eb4m7")
+texture_scale = 6.0
+script = ExtResource("12_dq1wh")
+enable_shadow = true
+light_brightness = 16.0
+point_color = Color(1, 1, 1, 0.67)
+edge_color = Color(0.16, 0.16, 0.16, 0.37)
+light_distance = 6.0
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_vertical = 3
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -152.05
+anchor_top = -1278.88
+anchor_right = 66.8
+anchor_bottom = 91.675
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.00392157, 0.00392157, 0.00392157, 0.890196)
+metadata/_edit_use_anchors_ = true
